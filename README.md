@@ -30,7 +30,7 @@ Bên liên quan                                       Vai trò
 + 
 - Xác định tầm quan trọng của Stakeholder:
 
-                         CAB SYSTEM
+                              CAB SYSTEM
                              │
           ┌──────────────────┼──────────────────┐
           │                  │                  │
@@ -40,7 +40,6 @@ Bên liên quan                                       Vai trò
      ┌────┼────┐        ┌────┼────┐       ┌────┼────┬────┐
      │    │    │        │    │    │       │    │    │    │
     KH   TX    NV      BGĐ  KT   CSKH     IT Thanh toán GPS Thông báo
-
 3. Mục đích nghiệp vụ 
   1. Mục đích nghiệp vụ là gì?
 
@@ -81,5 +80,19 @@ Hệ thống thông báo cho khách hàng biết giao dịch thất bại và ch
 | 12  | **Báo cáo & thống kê**           | Chuyến đi, doanh thu, tỷ lệ hoàn thành/hủy, hiệu quả tài xế          |
 | 13  | **Audit Log & bảo mật**          | Ghi nhận thao tác quan trọng, kiểm soát quyền truy cập               |
 
+yêu cầu nghiệp vụ
 
-
+| Mã       | Yêu cầu nghiệp vụ                                                                                                          |
+| -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **BR01** | Hệ thống phải hỗ trợ **số lượng lớn khách hàng và tài xế** sử dụng đồng thời.                                              |
+| **BR02** | Khách hàng có thể **đăng ký, đăng nhập và đặt xe** trực tuyến.                                                             |
+| **BR03** | Hệ thống phải **tự động tìm và phân công tài xế phù hợp**, ưu tiên tài xế gần khách hàng.                                  |
+| **BR04** | Nếu tài xế từ chối hoặc không phản hồi, hệ thống phải **tiếp tục tìm tài xế khác**.                                        |
+| **BR05** | Khách hàng phải có thể **theo dõi trạng thái chuyến đi và vị trí tài xế**.                                                 |
+| **BR06** | Hệ thống phải hỗ trợ **tính cước và thanh toán bằng tiền mặt hoặc chuyển khoản/thanh toán điện tử**.                       |
+| **BR07** | Hệ thống phải gửi **thông báo kịp thời** cho khách hàng và tài xế về các trạng thái của chuyến đi.                         |
+| **BR08** | Nhân viên vận hành phải có khả năng **quản lý khách hàng, tài xế, phương tiện và chuyến đi**.                              |
+| **BR09** | Hệ thống phải cung cấp **báo cáo về chuyến đi, doanh thu, tỷ lệ hoàn thành và tỷ lệ hủy**.                                 |
+| **BR10** | Hệ thống phải đảm bảo **bảo mật, xác thực, phân quyền và lưu vết các thao tác quan trọng**.                                |
+| **BR11** | Hệ thống phải có **khả năng mở rộng**, cho phép bổ sung dịch vụ, phương thức thanh toán và nhà cung cấp mới.               |
+| **BR12** | Hệ thống phải hoạt động **ổn định trong thời gian cao điểm**, tránh việc lỗi một chức năng làm ảnh hưởng toàn bộ hệ thống. |
