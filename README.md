@@ -27,32 +27,27 @@ Bên liên quan                                       Vai trò
 + Nhà cung cấp dịch vụ thanh toán          Xử lý các giao dịch thanh toán điện tử bên ngoài CAB
 + Nhà cung cấp dịch vụ bản đồ/GPS          Cung cấp vị trí, bản đồ, khoảng cách và hỗ trợ xác định tài xế gần khách
 + Nhà cung cấp dịch vụ thông báo           Gửi thông báo qua các kênh như SMS, email, push notification,...
++ 
 - Xác định tầm quan trọng của Stakeholder:
--                   STAKEHOLDER MATRIX – CAB SYSTEM
-
-                         MỨC ĐỘ QUAN TÂM
-                  THẤP                     CAO
-                    │                        │
-                    │                        │
-       ┌────────────┼────────────────────────┐
- CAO   │            │                        │
-       │   IT /     │  ★ BAN GIÁM ĐỐC       │
-       │   KỸ THUẬT │  ★ KHÁCH HÀNG          │
-       │            │  ★ TÀI XẾ              │
-       │            │  ★ NV VẬN HÀNH        │
-       │            │                        │
-       ├────────────┼────────────────────────┤
-       │            │                        │
-THẤP   │  GPS /     │  • KẾ TOÁN / TÀI CHÍNH│
-       │  BẢN ĐỒ    │  • CSKH                │
-       │            │  • NHÀ CUNG CẤP       │
-       │            │    THANH TOÁN          │
-       │            │  • NHÀ CUNG CẤP       │
-       │            │    THÔNG BÁO           │
-       │            │                        │
-       └────────────┴────────────────────────┘
-                    │                        │
-               ẢNH HƯỞNG THẤP          ẢNH HƯỞNG CAO
+  ┌──────────────────────┬─────────────────────────┐
+│ Ảnh hưởng CAO        │ Ảnh hưởng CAO            │
+│ Quan tâm THẤP        │ Quan tâm CAO             │
+│                      │                          │
+│ → Giữ hài lòng       │ → QUẢN LÝ CHẶT CHẼ      │
+│ IT / Kỹ thuật        │ Ban giám đốc             │
+│                      │ Khách hàng                │
+│                      │ Tài xế                    │
+│                      │ NV vận hành              │
+├──────────────────────┼─────────────────────────┤
+│ Ảnh hưởng THẤP       │ Ảnh hưởng THẤP           │
+│ Quan tâm THẤP        │ Quan tâm CAO             │
+│                      │                          │
+│ → Theo dõi           │ → Cập nhật thông tin     │
+│ GPS / Bản đồ         │ Kế toán / Tài chính      │
+│                      │ CSKH                      │
+│                      │ Nhà cung cấp thanh toán  │
+│                      │ Nhà cung cấp thông báo   │
+└──────────────────────┴─────────────────────────┘               
 
 
 3. Mục đích nghiệp vụ 
@@ -80,4 +75,19 @@ Doanh nghiệp có thể quản lý và tra cứu giao dịch tập trung, theo 
 
 Hệ thống thông báo cho khách hàng biết giao dịch thất bại và cho phép khách hàng thực hiện thanh toán lại theo chính sách của doanh nghiệp.
 
+| STT | Module                           | Chức năng chính                                                      |
+| --- | -------------------------------- | -------------------------------------------------------------------- |
+| 1   | **Quản lý tài khoản & xác thực** | Đăng ký, đăng nhập, cập nhật thông tin, phân quyền                   |
+| 2   | **Quản lý khách hàng**           | Hồ sơ khách hàng, lịch sử chuyến, đánh giá                           |
+| 3   | **Quản lý tài xế**               | Hồ sơ, trạng thái hoạt động, vị trí, thông tin phương tiện           |
+| 4   | **Đặt xe (Booking)**             | Điểm đón, điểm đến, loại xe, tạo/hủy yêu cầu                         |
+| 5   | **Tìm & phân công tài xế**       | Tìm tài xế phù hợp, ưu tiên tài xế gần, xử lý từ chối/không phản hồi |
+| 6   | **Quản lý chuyến đi (Trip)**     | Theo dõi và cập nhật trạng thái chuyến                               |
+| 7   | **Bản đồ & GPS**                 | Vị trí tài xế, khoảng cách, hỗ trợ tìm tài xế gần khách              |
+| 8   | **Tính cước & thanh toán**       | Tính giá, tiền mặt, chuyển khoản/thanh toán điện tử, xử lý giao dịch |
+| 9   | **Thông báo**                    | Thông báo cho khách hàng và tài xế về chuyến đi, thanh toán          |
+| 10  | **Đánh giá**                     | Khách hàng đánh giá tài xế sau chuyến                                |
+| 11  | **Quản trị vận hành**            | Quản lý khách hàng, tài xế, xe, chuyến và xử lý sự cố                |
+| 12  | **Báo cáo & thống kê**           | Chuyến đi, doanh thu, tỷ lệ hoàn thành/hủy, hiệu quả tài xế          |
+| 13  | **Audit Log & bảo mật**          | Ghi nhận thao tác quan trọng, kiểm soát quyền truy cập               |
 
