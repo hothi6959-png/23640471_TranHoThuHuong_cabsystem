@@ -99,7 +99,4 @@ Doanh nghiệp có thể quản lý và tra cứu giao dịch tập trung, theo 
 
 Hệ thống thông báo cho khách hàng biết giao dịch thất bại và cho phép khách hàng thực hiện thanh toán lại theo chính sách của doanh nghiệp.
 
-7. Mục tiêu cuối cùng?
 
-Đảm bảo quá trình thanh toán thuận tiện, linh hoạt, an toàn và dễ quản lý, đáp ứng nhu cầu đa dạng của khách hàng.
-  
