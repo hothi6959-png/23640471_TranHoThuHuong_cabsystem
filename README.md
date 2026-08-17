@@ -29,7 +29,7 @@ Bên liên quan                                       Vai trò
 + Nhà cung cấp dịch vụ thông báo           Gửi thông báo qua các kênh như SMS, email, push notification,...
 + 
 - Xác định tầm quan trọng của Stakeholder:
-  ┌──────────────────────┬─────────────────────────┐
+┌──────────────────────┬─────────────────────────┐
 │ Ảnh hưởng CAO        │ Ảnh hưởng CAO            │
 │ Quan tâm THẤP        │ Quan tâm CAO             │
 │                      │                          │
@@ -47,8 +47,7 @@ Bên liên quan                                       Vai trò
 │                      │ CSKH                      │
 │                      │ Nhà cung cấp thanh toán  │
 │                      │ Nhà cung cấp thông báo   │
-└──────────────────────┴─────────────────────────┘               
-
+└──────────────────────┴─────────────────────────┘
 
 3. Mục đích nghiệp vụ 
   1. Mục đích nghiệp vụ là gì?
