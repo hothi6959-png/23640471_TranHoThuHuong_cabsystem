@@ -29,25 +29,17 @@ Bên liên quan                                       Vai trò
 + Nhà cung cấp dịch vụ thông báo           Gửi thông báo qua các kênh như SMS, email, push notification,...
 + 
 - Xác định tầm quan trọng của Stakeholder:
-┌──────────────────────┬─────────────────────────┐
-│ Ảnh hưởng CAO        │ Ảnh hưởng CAO            │
-│ Quan tâm THẤP        │ Quan tâm CAO             │
-│                      │                          │
-│ → Giữ hài lòng       │ → QUẢN LÝ CHẶT CHẼ      │
-│ IT / Kỹ thuật        │ Ban giám đốc             │
-│                      │ Khách hàng                │
-│                      │ Tài xế                    │
-│                      │ NV vận hành              │
-├──────────────────────┼─────────────────────────┤
-│ Ảnh hưởng THẤP       │ Ảnh hưởng THẤP           │
-│ Quan tâm THẤP        │ Quan tâm CAO             │
-│                      │                          │
-│ → Theo dõi           │ → Cập nhật thông tin     │
-│ GPS / Bản đồ         │ Kế toán / Tài chính      │
-│                      │ CSKH                      │
-│                      │ Nhà cung cấp thanh toán  │
-│                      │ Nhà cung cấp thông báo   │
-└──────────────────────┴─────────────────────────┘
+
+                         CAB SYSTEM
+                             │
+          ┌──────────────────┼──────────────────┐
+          │                  │                  │
+          ▼                  ▼                  ▼
+     NGƯỜI DÙNG        QUẢN LÝ NỘI BỘ      BÊN HỖ TRỢ
+          │                  │                  │
+     ┌────┼────┐        ┌────┼────┐       ┌────┼────┬────┐
+     │    │    │        │    │    │       │    │    │    │
+    KH   TX    NV      BGĐ  KT   CSKH     IT Thanh toán GPS Thông báo
 
 3. Mục đích nghiệp vụ 
   1. Mục đích nghiệp vụ là gì?
