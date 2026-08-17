@@ -74,7 +74,7 @@ Doanh nghiệp có thể quản lý và tra cứu giao dịch tập trung, theo 
 6. Nếu chuyển khoản thất bại thì sao?
 
 Hệ thống thông báo cho khách hàng biết giao dịch thất bại và cho phép khách hàng thực hiện thanh toán lại theo chính sách của doanh nghiệp.
-
+- Các modle quan trọng nằm trong dự án : 
 | STT | Module                           | Chức năng chính                                                      |
 | --- | -------------------------------- | -------------------------------------------------------------------- |
 | 1   | **Quản lý tài khoản & xác thực** | Đăng ký, đăng nhập, cập nhật thông tin, phân quyền                   |
@@ -91,3 +91,22 @@ Hệ thống thông báo cho khách hàng biết giao dịch thất bại và ch
 | 12  | **Báo cáo & thống kê**           | Chuyến đi, doanh thu, tỷ lệ hoàn thành/hủy, hiệu quả tài xế          |
 | 13  | **Audit Log & bảo mật**          | Ghi nhận thao tác quan trọng, kiểm soát quyền truy cập               |
 
+        
+                 CAB SYSTEM
+                     │
+     ┌───────────────┼────────────────┐
+     ↓               ↓                ↓
+  Tài khoản       Đặt xe          Tài xế
+     │               │                │
+     └───────────────┼────────────────┘
+                     ↓
+             Tìm & phân công
+                tài xế
+                     ↓
+              Quản lý chuyến
+                     ↓
+             Tính cước & thanh toán
+                     ↓
+                Thông báo
+                     ↓
+                 Đánh giá
