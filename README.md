@@ -28,22 +28,78 @@ Bên liên quan                                       Vai trò
 + Nhà cung cấp dịch vụ bản đồ/GPS          Cung cấp vị trí, bản đồ, khoảng cách và hỗ trợ xác định tài xế gần khách
 + Nhà cung cấp dịch vụ thông báo           Gửi thông báo qua các kênh như SMS, email, push notification,...
 - Xác định tầm quan trọng của Stakeholder:
-  1. Rất quan trọng – cần quản lý chặt chẽ
-Ban giám đốc
-Khách hàng
-Tài xế
-Nhân viên vận hành
+- 
+                  STAKEHOLDER MATRIX – CAB SYSTEM
 
-2. Quan trọng – cần tham khảo và phối hợp
+                         MỨC ĐỘ QUAN TÂM
+                  THẤP                     CAO
+                    │                        │
+                    │                        │
+       ┌────────────┼────────────────────────┐
+ CAO   │            │                        │
+       │   IT /     │  ★ BAN GIÁM ĐỐC       │
+       │   KỸ THUẬT │  ★ KHÁCH HÀNG          │
+       │            │  ★ TÀI XẾ              │
+       │            │  ★ NV VẬN HÀNH        │
+       │            │                        │
+       ├────────────┼────────────────────────┤
+       │            │                        │
+THẤP   │  GPS /     │  • KẾ TOÁN / TÀI CHÍNH│
+       │  BẢN ĐỒ    │  • CSKH                │
+       │            │  • NHÀ CUNG CẤP       │
+       │            │    THANH TOÁN          │
+       │            │  • NHÀ CUNG CẤP       │
+       │            │    THÔNG BÁO           │
+       │            │                        │
+       └────────────┴────────────────────────┘
+                    │                        │
+               ẢNH HƯỞNG THẤP          ẢNH HƯỞNG CAO
 
-Kế toán/Tài chính
-Chăm sóc khách hàng
-IT
+- Mirdmap: 
+                                            ┌──────────────────┐
+                         │    CAB SYSTEM    │
+                         │   NỀN TẢNG ĐẶT XE │
+                         └────────┬─────────┘
+                                  │
+          ┌───────────────────────┼────────────────────────┐
+          │                       │                        │
+          ▼                       ▼                        ▼
+   NGƯỜI DÙNG TRỰC TIẾP      QUẢN LÝ NỘI BỘ          BÊN HỖ TRỢ
+          │                       │                        │
+     ┌────┼────┐            ┌─────┼─────┐          ┌─────┼─────┐
+     │    │    │            │     │     │          │     │     │
+     ▼    ▼    ▼            ▼     ▼     ▼          ▼     ▼     ▼
+ Khách  Tài xế  NV       Ban GĐ  Kế toán  CSKH     IT   Thanh  GPS/
+ hàng          vận hành                         /KT   toán   Bản đồ
+                                                         │
+                                                         ▼
+                                                     Thông báo
+3. Mục đích nghiệp vụ 
+  1. Mục đích nghiệp vụ là gì?
 
-3. Hỗ trợ – cần theo dõi
+Xây dựng hệ thống thanh toán linh hoạt, cho phép khách hàng thanh toán chi phí chuyến đi bằng tiền mặt hoặc chuyển khoản, tùy theo nhu cầu.
 
-Nhà cung cấp thanh toán
-Nhà cung cấp GPS/Bản đồ
-Nhà cung cấp thông báo
+2. Vì sao cần thanh toán tiền mặt?
 
+Đáp ứng những khách hàng có nhu cầu thanh toán trực tiếp cho tài xế và không sử dụng phương thức thanh toán điện tử.
+
+3. Vì sao cần thanh toán chuyển khoản?
+
+Tạo sự thuận tiện cho khách hàng, giúp thanh toán nhanh chóng, không cần sử dụng tiền mặt và dễ dàng ghi nhận giao dịch.
+
+4. Khách hàng được lợi ích gì?
+
+Khách hàng có nhiều lựa chọn thanh toán, thuận tiện và chủ động hơn sau khi hoàn thành chuyến đi.
+
+5. Doanh nghiệp được lợi ích gì?
+
+Doanh nghiệp có thể quản lý và tra cứu giao dịch tập trung, theo dõi doanh thu và hỗ trợ đối soát thanh toán.
+
+6. Nếu chuyển khoản thất bại thì sao?
+
+Hệ thống thông báo cho khách hàng biết giao dịch thất bại và cho phép khách hàng thực hiện thanh toán lại theo chính sách của doanh nghiệp.
+
+7. Mục tiêu cuối cùng?
+
+Đảm bảo quá trình thanh toán thuận tiện, linh hoạt, an toàn và dễ quản lý, đáp ứng nhu cầu đa dạng của khách hàng.
   
