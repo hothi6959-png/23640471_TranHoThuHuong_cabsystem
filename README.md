@@ -28,8 +28,7 @@ Bên liên quan                                       Vai trò
 + Nhà cung cấp dịch vụ bản đồ/GPS          Cung cấp vị trí, bản đồ, khoảng cách và hỗ trợ xác định tài xế gần khách
 + Nhà cung cấp dịch vụ thông báo           Gửi thông báo qua các kênh như SMS, email, push notification,...
 - Xác định tầm quan trọng của Stakeholder:
-- 
-                  STAKEHOLDER MATRIX – CAB SYSTEM
+-                   STAKEHOLDER MATRIX – CAB SYSTEM
 
                          MỨC ĐỘ QUAN TÂM
                   THẤP                     CAO
@@ -55,7 +54,8 @@ THẤP   │  GPS /     │  • KẾ TOÁN / TÀI CHÍNH│
                     │                        │
                ẢNH HƯỞNG THẤP          ẢNH HƯỞNG CAO
 
-- Mirdmap: 
+- Mirdmap:
+  
                                             ┌──────────────────┐
                          │    CAB SYSTEM    │
                          │   NỀN TẢNG ĐẶT XE │
