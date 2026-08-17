@@ -54,26 +54,7 @@ THẤP   │  GPS /     │  • KẾ TOÁN / TÀI CHÍNH│
                     │                        │
                ẢNH HƯỞNG THẤP          ẢNH HƯỞNG CAO
 
-- Mirdmap:
-  
-                                            ┌──────────────────┐
-                         │    CAB SYSTEM    │
-                         │   NỀN TẢNG ĐẶT XE │
-                         └────────┬─────────┘
-                                  │
-          ┌───────────────────────┼────────────────────────┐
-          │                       │                        │
-          ▼                       ▼                        ▼
-   NGƯỜI DÙNG TRỰC TIẾP      QUẢN LÝ NỘI BỘ          BÊN HỖ TRỢ
-          │                       │                        │
-     ┌────┼────┐            ┌─────┼─────┐          ┌─────┼─────┐
-     │    │    │            │     │     │          │     │     │
-     ▼    ▼    ▼            ▼     ▼     ▼          ▼     ▼     ▼
- Khách  Tài xế  NV       Ban GĐ  Kế toán  CSKH     IT   Thanh  GPS/
- hàng          vận hành                         /KT   toán   Bản đồ
-                                                         │
-                                                         ▼
-                                                     Thông báo
+
 3. Mục đích nghiệp vụ 
   1. Mục đích nghiệp vụ là gì?
 
