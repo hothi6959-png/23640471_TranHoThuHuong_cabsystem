@@ -1,0 +1,664 @@
+openapi: 3.0.3
+info:
+  title: CAB System API
+  version: 1.0.0
+  description: API đặc tả cho nền tảng đặt xe CAB System.
+
+servers:
+  - url: http://localhost:8080/api
+
+tags:
+  - name: Authentication
+  - name: Customers
+  - name: Drivers
+  - name: Vehicle Types
+  - name: Trips
+  - name: Payments
+  - name: Ratings
+  - name: Notifications
+  - name: Operations
+  - name: Reports
+
+paths:
+  /auth/register:
+    post:
+      tags: [Authentication]
+      summary: UC01 - Đăng ký tài khoản
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RegisterRequest' }
+      responses:
+        '201': { description: Đăng ký thành công }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '409': { description: Tài khoản đã tồn tại }
+
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: Đăng nhập
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LoginRequest' }
+      responses:
+        '200':
+          description: Đăng nhập thành công
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuthResponse' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /me:
+    get:
+      tags: [Authentication]
+      summary: Lấy thông tin tài khoản hiện tại
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+    patch:
+      tags: [Authentication]
+      summary: Cập nhật thông tin cá nhân
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateProfileRequest' }
+      responses:
+        '200': { description: Cập nhật thành công }
+
+  /customers:
+    get:
+      tags: [Customers, Operations]
+      summary: Danh sách khách hàng
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Customer' }
+
+  /drivers:
+    get:
+      tags: [Drivers, Operations]
+      summary: Danh sách tài xế
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Driver' }
+    post:
+      tags: [Drivers, Operations]
+      summary: Nhân viên vận hành tạo tài khoản tài xế
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateDriverRequest' }
+      responses:
+        '201': { description: Tạo tài xế thành công }
+
+  /drivers/{driverId}/availability:
+    patch:
+      tags: [Drivers]
+      summary: Cập nhật trạng thái sẵn sàng nhận chuyến
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/DriverId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [availability]
+              properties:
+                availability:
+                  type: string
+                  enum: [AVAILABLE, OFFLINE]
+      responses:
+        '200': { description: Cập nhật thành công }
+
+  /drivers/{driverId}/location:
+    patch:
+      tags: [Drivers]
+      summary: Cập nhật vị trí tài xế
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/DriverId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Location' }
+      responses:
+        '200': { description: Cập nhật vị trí thành công }
+
+  /vehicle-types:
+    get:
+      tags: [Vehicle Types]
+      summary: Lấy danh sách loại xe
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/VehicleType' }
+
+  /trips/estimate:
+    post:
+      tags: [Trips]
+      summary: Ước tính chuyến trước khi đặt
+      description: Công thức tính cước cụ thể cần xác nhận với khách hàng.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TripEstimateRequest' }
+      responses:
+        '200':
+          description: Thông tin ước tính
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TripEstimate' }
+
+  /trips:
+    get:
+      tags: [Trips, Operations]
+      summary: Tra cứu danh sách chuyến đi
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: status
+          in: query
+          schema: { $ref: '#/components/schemas/TripStatus' }
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Trip' }
+    post:
+      tags: [Trips]
+      summary: UC02 - Tạo yêu cầu đặt xe
+      description: Sau khi tạo, hệ thống bắt đầu tìm và phân công tài xế.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateTripRequest' }
+      responses:
+        '201':
+          description: Yêu cầu đặt xe được tạo
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Trip' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+
+  /trips/{tripId}:
+    get:
+      tags: [Trips]
+      summary: UC04 - Theo dõi chi tiết chuyến đi
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TripDetail' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /trips/{tripId}/assignment:
+    get:
+      tags: [Trips]
+      summary: UC03 - Xem trạng thái tìm và phân công tài xế
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      responses:
+        '200':
+          description: Trạng thái phân công
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AssignmentStatus' }
+
+  /trips/{tripId}/driver-response:
+    post:
+      tags: [Trips, Drivers]
+      summary: Tài xế chấp nhận hoặc từ chối chuyến
+      description: Nếu từ chối hoặc không phản hồi, hệ thống tiếp tục tìm tài xế khác.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [response]
+              properties:
+                response: { type: string, enum: [ACCEPT, REJECT] }
+                reason: { type: string }
+      responses:
+        '200': { description: Đã ghi nhận phản hồi }
+
+  /trips/{tripId}/status:
+    patch:
+      tags: [Trips, Drivers]
+      summary: UC05 - Cập nhật trạng thái chuyến đi
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { $ref: '#/components/schemas/TripStatus' }
+      responses:
+        '200': { description: Cập nhật thành công }
+        '409': { description: Không thể chuyển sang trạng thái này }
+
+  /trips/{tripId}/cancel:
+    post:
+      tags: [Trips]
+      summary: Hủy chuyến
+      description: Chính sách và phí hủy chuyến cần được xác nhận với khách hàng.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      responses:
+        '200': { description: Hủy chuyến thành công }
+
+  /customers/me/trips:
+    get:
+      tags: [Trips]
+      summary: Xem lịch sử chuyến đi
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Trip' }
+
+  /trips/{tripId}/fare:
+    get:
+      tags: [Trips, Payments]
+      summary: Lấy cước chuyến đi
+      description: Cước được xác định sau khi chuyến hoàn thành.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      responses:
+        '200':
+          description: Thông tin cước
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Fare' }
+
+  /trips/{tripId}/payment:
+    post:
+      tags: [Payments]
+      summary: UC06 - Thanh toán chuyến đi
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreatePaymentRequest' }
+      responses:
+        '201':
+          description: Giao dịch được ghi nhận
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Payment' }
+
+  /payments/{paymentId}:
+    get:
+      tags: [Payments, Operations]
+      summary: Tra cứu giao dịch
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Payment' }
+
+  /trips/{tripId}/rating:
+    post:
+      tags: [Ratings]
+      summary: UC07 - Đánh giá tài xế
+      description: Chỉ được đánh giá sau khi chuyến đã hoàn thành.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateRatingRequest' }
+      responses:
+        '201': { description: Đánh giá được lưu }
+        '409': { description: Chuyến chưa đủ điều kiện đánh giá }
+
+  /notifications:
+    get:
+      tags: [Notifications]
+      summary: Xem thông báo của người dùng
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Notification' }
+
+  /operations/trips/{tripId}/incident:
+    post:
+      tags: [Operations]
+      summary: UC08 - Ghi nhận và xử lý sự cố chuyến đi
+      security: [{ bearerAuth: [] }]
+      parameters: [{ $ref: '#/components/parameters/TripId' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IncidentRequest' }
+      responses:
+        '200': { description: Sự cố được ghi nhận }
+
+  /reports/summary:
+    get:
+      tags: [Reports]
+      summary: Xem báo cáo tổng quan
+      description: Các chỉ số chi tiết cần xác nhận với khách hàng.
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Báo cáo tổng quan
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReportSummary' }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    DriverId:
+      name: driverId
+      in: path
+      required: true
+      schema: { type: string }
+    TripId:
+      name: tripId
+      in: path
+      required: true
+      schema: { type: string }
+
+  responses:
+    BadRequest:
+      description: Dữ liệu không hợp lệ
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Unauthorized:
+      description: Chưa xác thực
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFound:
+      description: Không tìm thấy dữ liệu
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+  schemas:
+    UserRole:
+      type: string
+      enum: [CUSTOMER, DRIVER, OPERATOR, ADMIN]
+
+    TripStatus:
+      type: string
+      enum:
+        - SEARCHING_DRIVER
+        - DRIVER_ASSIGNED
+        - DRIVER_ARRIVED
+        - PASSENGER_PICKED_UP
+        - IN_PROGRESS
+        - COMPLETED
+        - NO_DRIVER_FOUND
+        - CANCELLED
+        - INCIDENT
+
+    Location:
+      type: object
+      required: [latitude, longitude]
+      properties:
+        latitude: { type: number, format: double, example: 10.7769 }
+        longitude: { type: number, format: double, example: 106.7009 }
+        address: { type: string, example: Quận 1 }
+
+    User:
+      type: object
+      properties:
+        id: { type: string, example: usr_001 }
+        fullName: { type: string, example: Nguyễn Văn A }
+        phone: { type: string, example: "0900000000" }
+        email: { type: string, format: email }
+        role: { $ref: '#/components/schemas/UserRole' }
+
+    RegisterRequest:
+      type: object
+      required: [fullName, phone, password]
+      properties:
+        fullName: { type: string }
+        phone: { type: string }
+        email: { type: string, format: email }
+        password: { type: string, format: password }
+        role: { type: string, enum: [CUSTOMER, DRIVER] }
+
+    LoginRequest:
+      type: object
+      required: [phone, password]
+      properties:
+        phone: { type: string }
+        password: { type: string, format: password }
+
+    AuthResponse:
+      type: object
+      properties:
+        accessToken: { type: string }
+        tokenType: { type: string, example: Bearer }
+        user: { $ref: '#/components/schemas/User' }
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        fullName: { type: string }
+        email: { type: string, format: email }
+
+    Customer:
+      allOf:
+        - $ref: '#/components/schemas/User'
+
+    Vehicle:
+      type: object
+      properties:
+        id: { type: string }
+        licensePlate: { type: string, example: 59A-12345 }
+        brand: { type: string }
+        model: { type: string }
+        vehicleTypeId: { type: string }
+
+    Driver:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            availability: { type: string, enum: [AVAILABLE, OFFLINE] }
+            currentLocation: { $ref: '#/components/schemas/Location' }
+            vehicle: { $ref: '#/components/schemas/Vehicle' }
+
+    CreateDriverRequest:
+      type: object
+      required: [fullName, phone, password]
+      properties:
+        fullName: { type: string }
+        phone: { type: string }
+        password: { type: string, format: password }
+        vehicle: { $ref: '#/components/schemas/Vehicle' }
+
+    VehicleType:
+      type: object
+      properties:
+        id: { type: string, example: car_4_seat }
+        name: { type: string, example: Xe 4 chỗ }
+
+    TripEstimateRequest:
+      type: object
+      required: [pickup, destination, vehicleTypeId]
+      properties:
+        pickup: { $ref: '#/components/schemas/Location' }
+        destination: { $ref: '#/components/schemas/Location' }
+        vehicleTypeId: { type: string }
+
+    TripEstimate:
+      type: object
+      properties:
+        estimatedDistance: { type: number }
+        estimatedDurationMinutes: { type: integer }
+        estimatedFare: { type: number, format: double }
+
+    CreateTripRequest:
+      type: object
+      required: [pickup, destination, vehicleTypeId]
+      properties:
+        pickup: { $ref: '#/components/schemas/Location' }
+        destination: { $ref: '#/components/schemas/Location' }
+        vehicleTypeId: { type: string }
+        paymentMethod: { type: string, enum: [CASH, ELECTRONIC] }
+
+    Trip:
+      type: object
+      properties:
+        id: { type: string, example: trip_001 }
+        customerId: { type: string }
+        driverId: { type: string, nullable: true }
+        pickup: { $ref: '#/components/schemas/Location' }
+        destination: { $ref: '#/components/schemas/Location' }
+        vehicleTypeId: { type: string }
+        status: { $ref: '#/components/schemas/TripStatus' }
+        createdAt: { type: string, format: date-time }
+
+    TripDetail:
+      allOf:
+        - $ref: '#/components/schemas/Trip'
+        - type: object
+          properties:
+            driver: { $ref: '#/components/schemas/Driver' }
+            currentDriverLocation: { $ref: '#/components/schemas/Location' }
+            estimatedArrivalMinutes: { type: integer }
+            fare: { $ref: '#/components/schemas/Fare' }
+
+    AssignmentStatus:
+      type: object
+      properties:
+        tripId: { type: string }
+        status: { $ref: '#/components/schemas/TripStatus' }
+        assignedDriverId: { type: string, nullable: true }
+        message: { type: string }
+
+    Fare:
+      type: object
+      properties:
+        tripId: { type: string }
+        amount: { type: number, format: double }
+        currency: { type: string, example: VND }
+
+    CreatePaymentRequest:
+      type: object
+      required: [method]
+      properties:
+        method: { type: string, enum: [CASH, ELECTRONIC] }
+        provider: { type: string }
+
+    Payment:
+      type: object
+      properties:
+        id: { type: string, example: pay_001 }
+        tripId: { type: string }
+        amount: { type: number, format: double }
+        method: { type: string, enum: [CASH, ELECTRONIC] }
+        status: { type: string, enum: [PENDING, SUCCESS, FAILED] }
+        providerReference: { type: string }
+
+    CreateRatingRequest:
+      type: object
+      required: [score]
+      properties:
+        score: { type: integer, minimum: 1, maximum: 5 }
+        comment: { type: string }
+
+    Notification:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        content: { type: string }
+        read: { type: boolean }
+        createdAt: { type: string, format: date-time }
+
+    IncidentRequest:
+      type: object
+      required: [description]
+      properties:
+        description: { type: string }
+        action: { type: string }
+
+    ReportSummary:
+      type: object
+      properties:
+        totalTrips: { type: integer }
+        totalRevenue: { type: number, format: double }
+        completionRate: { type: number, format: double }
+        cancellationRate: { type: number, format: double }
+
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+        timestamp: { type: string, format: date-time }
