@@ -1,15 +1,6 @@
 ## Test Cases – CAB System
 
-> Bộ test case được xây dựng theo form Excel mẫu và các API trong file YAML. Phạm vi được giới hạn ở các trường hợp cần thiết, gồm Positive, Negative và Power BI.
 
-### Tổng quan
-
-| Loại | Số lượng |
-|---|---:|
-| Positive | 24 |
-| Negative | 14 |
-| Power BI | 4 |
-| **Tổng cộng** | **42** |
 
 ### Danh sách test case
 
